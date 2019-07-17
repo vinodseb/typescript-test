@@ -1,0 +1,1 @@
+curl -X PUT -H "Content-Type: application/json" -d '{"created":"2019-07-17T22:15:06.483Z","enabled":true,"number":"123","title":"Awesome Journal","updated":"2019-07-17T22:15:06.483Z","widgetEnabled":true}' http://localhost:8080/journal

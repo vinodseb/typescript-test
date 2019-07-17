@@ -1,34 +1,39 @@
 import logger = require("../logger");
 import { Journal } from "../model";
+import express, {
+    Request,
+    Response
+} from "express";
 
-class JournalService {
-    constructor() {
-    }
-
-    get = (journalNumber: Number): Journal => {
-        return {
+namespace journal_service {
+    export const get = (req: Request, res: Response): void => {
+        res.send({
             created: new Date(),
             enabled: true,
-            number: journalNumber,
+            number: req.params.id,
             title: "Awesome Journal",
             updated: new Date(),
             widgetEnabled: true
-        };
+        });
     };
-    
-    create = (journal: Journal) => {
+
+    export const create = (req: Request, res: Response) => {
+        const journal: Journal = req.body;
         logger.log('info', `journal ${JSON.stringify(journal)} created`);
+        res.send(journal);
     }
-    
-    update = (journal: Journal) => {
-        logger.log('info', `journal ${JSON.stringify(journal)} updated`);
+
+    export const update = (req: Request, res: Response) => {
+        logger.log('info', `journal ${JSON.stringify(req.body)} updated`);
+        res.send(req.body);
     }
-    
-    delete = (journal: Journal) => {
-        logger.log('info', `journal ${JSON.stringify(journal)} deleted`);
+
+    export const remove = (req: Request, res: Response) => {
+        logger.log('info', `journal ${JSON.stringify(req.body)} deleted`);
+        res.send(req.body);
     }
 }
 
 export {
-    JournalService
+    journal_service
 }

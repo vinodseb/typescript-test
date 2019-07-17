@@ -1,32 +1,14 @@
-import express, { 
-    Request, 
-    Response, 
-    Router 
-} from "express";
-import { JournalService } from "./services/journal";
-import { Journal } from "./model";
+import express, { Router } from "express";
 import bodyParser from 'body-parser';
+import { journal_service } from "./services/journal";
 
 const router: Router = express.Router();
-const journalService = new JournalService();
 const jsonParser = bodyParser.json();
 
 router.route('/journal/:id*?')
-    .get((req: Request, res: Response) => {
-        const journal = journalService.get(req.params.id); 
-        res.send(journal);
-    })
-    .post(jsonParser, (req: Request, res: Response) => {
-        journalService.update(req.body as Journal);
-        res.send('Journal Updated')
-    })
-    .put(jsonParser, (req: Request, res: Response) => {
-        journalService.create(req.body as Journal);
-        res.send('New Journal Created')
-    })
-    .delete(jsonParser, (req: Request, res: Response) => {
-        journalService.delete(req.body as Journal);
-        res.send('Journal Deleted')
-    })
+    .get(journal_service.get)
+    .post(jsonParser, journal_service.update)
+    .put(jsonParser, journal_service.create)
+    .delete(jsonParser, journal_service.remove)
 
 export = router
