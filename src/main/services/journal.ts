@@ -1,9 +1,6 @@
 import logger = require("../logger");
 import { Journal } from "../model";
-import express, {
-    Request,
-    Response
-} from "express";
+import {Request, Response} from "express";
 
 export namespace JournalService {
     export const get = (req: Request, res: Response): void => {
