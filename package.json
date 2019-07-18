@@ -11,22 +11,20 @@
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
     "prestart": "npm run build",
-    "start": "node .",
+    "start": "node dist/main",
     "start-dev": "nodemon .",
     "test": "find src/test -name '*.test.ts' | xargs mocha -r ts-node/register -R spec --exit"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "portfinder": "^1.0.21",
-    "winston": "^3.2.1"
-  },
-  "devDependencies": {
+    "winston": "^3.2.1",
     "@types/chai": "^4.1.7",
-    "@types/chai-http": "^4.2.0",
     "@types/express": "^4.17.0",
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.6.2",
