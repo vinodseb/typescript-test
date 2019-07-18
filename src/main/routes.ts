@@ -11,4 +11,4 @@ router.route("/journal/:id*?")
     .put(jsonParser, JournalService.create)
     .delete(jsonParser, JournalService.remove);
 
-export = router ;
+export = router;
