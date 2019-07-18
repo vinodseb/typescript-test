@@ -1,14 +1,12 @@
-import express, {
-    Express, Router
-} from "express";
-import router from './routes';
-import logger from './logger';
+import express, { Express } from "express";
+import logger from "./logger";
+import router from "./routes";
 
 const app: Express = express();
-const port: Number = 8080;
+const port: number = 8080;
 
-app.use('/', router);
+app.use("/", router);
 
 app.listen(port, () => {
-    logger.log('info', `server started at http://localhost:${port}`);
+    logger.log("info", `server started at http://localhost:${port}`);
 });

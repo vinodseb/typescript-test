@@ -1,9 +1,9 @@
 
-export interface Journal {
-    number: Number;
-    title: String;
+export interface IJournal {
+    number: number;
+    title: string;
     created: Date;
     updated: Date;
-    enabled: Boolean;
-    widgetEnabled: Boolean;
-};
+    enabled: boolean;
+    widgetEnabled: boolean;
+}
