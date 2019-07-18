@@ -5,7 +5,7 @@ import express, {
     Response
 } from "express";
 
-namespace journal_service {
+export namespace JournalService {
     export const get = (req: Request, res: Response): void => {
         res.send({
             created: new Date(),
@@ -34,8 +34,4 @@ namespace journal_service {
         logger.log('info', `journal ${JSON.stringify(journal)} deleted`);
         res.send(journal);
     }
-}
-
-export {
-    journal_service
 }
