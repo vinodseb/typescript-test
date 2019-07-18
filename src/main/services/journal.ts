@@ -24,13 +24,15 @@ namespace journal_service {
     }
 
     export const update = (req: Request, res: Response) => {
-        logger.log('info', `journal ${JSON.stringify(req.body)} updated`);
-        res.send(req.body);
+        const journal: Journal = req.body;
+        logger.log('info', `journal ${JSON.stringify(journal)} updated`);
+        res.send(journal);
     }
 
     export const remove = (req: Request, res: Response) => {
-        logger.log('info', `journal ${JSON.stringify(req.body)} deleted`);
-        res.send(req.body);
+        const journal: Journal = req.body;
+        logger.log('info', `journal ${JSON.stringify(journal)} deleted`);
+        res.send(journal);
     }
 }
 
