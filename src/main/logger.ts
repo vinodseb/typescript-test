@@ -1,5 +1,5 @@
-import winston, { 
-    Logger 
+import winston, {
+    Logger
 } from 'winston';
 
 const logger: Logger = winston.createLogger({
