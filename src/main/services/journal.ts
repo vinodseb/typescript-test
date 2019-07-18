@@ -4,11 +4,11 @@ import { IJournal } from "../model";
 
 export const get = (req: Request, res: Response): void => {
     res.send({
-        created: new Date(),
+        created: getCurrentDate(),
         enabled: true,
         number: req.params.id,
         title: "Awesome Journal",
-        updated: new Date(),
+        updated: getCurrentDate(),
         widgetEnabled: true
     });
 };
@@ -30,3 +30,5 @@ export const remove = (req: Request, res: Response) => {
     logger.log("info", `journal ${JSON.stringify(journal)} deleted`);
     res.send(journal);
 };
+
+export const getCurrentDate = (): Date => new Date();
