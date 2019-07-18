@@ -2,6 +2,10 @@
   "name": "typescript-rest",
   "version": "1.0.0",
   "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vinodseb/typescript-test.git"
+  },
   "main": "dist/index.js",
   "scripts": {
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
@@ -9,7 +13,7 @@
     "prestart": "npm run build",
     "start": "node .",
     "start-dev": "nodemon .",
-    "test": "mocha -r ts-node/register src/test/**/*.spec.ts"
+    "test": "find src/test -name '*.test.ts' | xargs mocha -r ts-node/register -R spec --exit"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +21,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "portfinder": "^1.0.21",
     "winston": "^3.2.1"
   },
   "devDependencies": {
