@@ -1,5 +1,18 @@
 version: "2"
 services:
+  db:
+    container_name: pgdb
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=local
+      - PGDATA=/var/lib/postgresql/data/local
+    ports:
+      - '5432:5432'
+    volumes:
+      - $HOME/docker/volumes/postgres:/var/lib/postgresql/data
+  
   node:
     image: "node:8"
     user: "node"
@@ -7,6 +20,11 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=8082
+      - PGHOST=db
+      - PGUSER=postgres
+      - PGDATABASE=local
+      - PGPASSWORD=postgres
+      - PGPORT=5432
     volumes:
       - ../:/home/node/app
     ports:
