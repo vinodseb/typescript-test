@@ -1,20 +1,15 @@
-import { Request, Response } from "express";
-import { Pool, QueryResult } from "pg";
+import {Request, Response} from "express";
 import logger = require("../logger");
-import { IJournal } from "../model";
-
-const pool: Pool = new Pool();
+import {IJournal} from "../model";
 
 export const get = (req: Request, res: Response): void => {
-    pool.query("SELECT NOW() AS NOW", (err, result: QueryResult) => {
-        res.send({
-            created: getCurrentDate(),
-            enabled: true,
-            number: req.params.id,
-            title: `Awesome Journal ${result && result.rows[0].now}`,
-            updated: getCurrentDate(),
-            widgetEnabled: true
-        });
+    res.send({
+        created: getCurrentDate(),
+        enabled: true,
+        number: req.params.id,
+        title: `Awesome Journal`,
+        updated: getCurrentDate(),
+        widgetEnabled: true
     });
 };
 

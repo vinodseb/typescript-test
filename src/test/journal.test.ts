@@ -3,8 +3,9 @@ import "mocha";
 import { getCurrentDate } from "../main/services/journal";
 
 describe("getCurrentDate function", () => {
-    it("should return current date", () => {
+    it("should return current date", (done) => {
         const currentDate: Date = getCurrentDate();
         expect(currentDate.toISOString()).to.equals(new Date().toISOString());
+        done();
     });
 });

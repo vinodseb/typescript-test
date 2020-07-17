@@ -12,16 +12,22 @@ before(async () => {
 });
 
 describe("Journal API Request", () => {
-    it("should return response on call", () => {
-        return chai.request(server).get("/journal/1234")
+
+    it("should return response on call", (done) => {
+        chai.request(server).get("/journal/1234")
             .then((res) => {
-                chai.expect(res.body.title).to.has("Awesome Journal");
-            });
+                chai.expect(res.body).to.have.deep.nested.property("title", "Awesome Journal");
+                done();
+            })
+            .catch((err) => done(err));
     });
-    it("should return response on call", () => {
-        return chai.request(server).get("/journal/1234")
+
+    it("should return response on call", (done) => {
+        chai.request(server).get("/journal/1234")
             .then((res) => {
-                chai.expect(res.body.title).to.has("Awesome Journal");
-            });
+                chai.expect(res.body).to.have.deep.nested.property("title", "Awesome Journal");
+                done();
+            })
+            .catch((err) => done(err));
     });
 });
