@@ -2,7 +2,7 @@ import chai from "chai";
 import chaiHttp from "chai-http";
 import { Server } from "http";
 import "mocha";
-import { TestServer } from "./FunctionalTestUtil";
+import { TestServer } from "./FunctionalTestUtil.test";
 
 chai.use(chaiHttp);
 let server: Server;

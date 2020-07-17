@@ -6,15 +6,13 @@
     "type": "git",
     "url": "https://github.com/vinodseb/typescript-test.git"
   },
-  "main": "app/src/index.js",
+  "main": "app/index.js",
   "scripts": {
-    "copyjson": "copyfiles src/**/*.json app",
-    "copyhbs": "copyfiles 'src/**/*.hbs' app",
-    "copyhtml": "copyfiles 'src/**/*.html' app",
+    "copyjson": "cd src/main && copyfiles \"./**/*.json\" ../../app",
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
-    "build": "tsc && npm run copyjson && npm run copyhbs && npm run copyhtml",
+    "build": "tsc && npm run copyjson",
     "prestart": "npm run build",
-    "start": "node app/src/index",
+    "start": "node app/index",
     "start-dev": "nodemon .",
     "test": "find src/test -name '*.test.ts' | xargs mocha -r ts-node/register -R spec --exit"
   },
