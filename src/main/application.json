@@ -1,3 +1,9 @@
 {
-  "env": "prod"
+  "env": "prod",
+  "local": {
+    "path": "process.env.PATH",
+    "test": {
+      "home": "process.env.HOME"
+    }
+  }
 }
