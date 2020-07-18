@@ -38,7 +38,7 @@ export const extractVariableName = (value: string): string => {
     const startPosition = EXPRESSION_START.length;
     const endPosition = value.length - (EXPRESSION_START.length + EXPRESSION_END.length);
     const variableName = value.substr(startPosition, endPosition).trim();
-    return variableName.length === 0 ? undefined : variableName;
+    return variableName.length > 0 ? variableName : undefined;
 };
 
 export const constructExpression = (variableName: string): string =>
