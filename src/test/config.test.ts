@@ -1,6 +1,12 @@
 // tslint:disable:no-unused-expression
 import chai from "chai";
-import {constructExpression, extractVariableName, isExpression, isString} from "../main/config";
+import {constructExpression, evaluateExpression, extractVariableName, isExpression, isString} from "../main/config";
+
+const VARIABLE_ONE = "test";
+
+before( async () => {
+    process.env.VARIABLE_ONE = VARIABLE_ONE;
+});
 
 describe("Given Config Module", () => {
     describe("When isString is called", () => {
@@ -64,6 +70,21 @@ describe("Given Config Module", () => {
 
         it("Should return undefined from a null value", () => {
             chai.expect(constructExpression(null)).to.be.undefined;
+        });
+    });
+
+    describe("When evaluateExpression is called", () => {
+        it("Should return value from a valid expression", () => {
+            chai.expect(evaluateExpression("process.env.VARIABLE_ONE")).to.be.equal(VARIABLE_ONE);
+            chai.expect(evaluateExpression(" process.env.VARIABLE_ONE ")).to.be.equal(VARIABLE_ONE);
+        });
+
+        it("Should return undefined from an empty expression", () => {
+            chai.expect(evaluateExpression("")).to.be.undefined;
+        });
+
+        it("Should return undefined from a null expression", () => {
+            chai.expect(evaluateExpression(null)).to.be.undefined;
         });
     });
 });
