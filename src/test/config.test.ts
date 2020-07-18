@@ -11,7 +11,7 @@ before( async () => {
 describe("Given Config Module", () => {
     describe("When isString is called", () => {
         it("Should return true with a valid string", () => {
-            chai.expect(isString("{{VALID_STRING}}")).to.be.equal(true);
+            chai.expect(isString("${VALID_STRING}")).to.be.equal(true);
             chai.expect(isString("")).to.be.equal(true);
         });
 
@@ -27,8 +27,8 @@ describe("Given Config Module", () => {
 
     describe("When isExpression is called", () => {
         it("Should return true with a valid expression", () => {
-            chai.expect(isExpression("{{VALID_EXPRESSION}}")).to.be.equal(true);
-            chai.expect(isExpression(" {{VALID_EXPRESSION}}    ")).to.be.equal(true);
+            chai.expect(isExpression("${VALID_EXPRESSION}")).to.be.equal(true);
+            chai.expect(isExpression(" ${VALID_EXPRESSION}    ")).to.be.equal(true);
         });
 
         it("Should return false with invalid expressions", () => {
@@ -43,13 +43,13 @@ describe("Given Config Module", () => {
 
     describe("When extractVariableName is called", () => {
         it("Should return variableName from a valid expression", () => {
-            chai.expect(extractVariableName("{{VALID_EXPRESSION}}")).to.be.equal("VALID_EXPRESSION");
-            chai.expect(extractVariableName("{{ VALID_EXPRESSION    }}")).to.be.equal("VALID_EXPRESSION");
+            chai.expect(extractVariableName("${VALID_EXPRESSION}")).to.be.equal("VALID_EXPRESSION");
+            chai.expect(extractVariableName("${ VALID_EXPRESSION    }")).to.be.equal("VALID_EXPRESSION");
         });
 
         it("Should return undefined from an empty expression", () => {
-            chai.expect(extractVariableName("{{}}")).to.be.undefined;
-            chai.expect(extractVariableName("{{      }}")).to.be.undefined;
+            chai.expect(extractVariableName("${}")).to.be.undefined;
+            chai.expect(extractVariableName("${      }")).to.be.undefined;
         });
 
         it("Should return undefined on a null expression", () => {

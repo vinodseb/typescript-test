@@ -2,8 +2,8 @@
 import ts from "typescript";
 import config from "./application.json";
 
-const EXPRESSION_START = "{{";
-const EXPRESSION_END = "}}";
+const EXPRESSION_START = "${";
+const EXPRESSION_END = "}";
 
 export const populateEnvironmentVariables = (obj: any): any => {
     Object.keys(obj)
