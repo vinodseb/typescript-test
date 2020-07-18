@@ -1,6 +1,6 @@
 // tslint:disable:no-unused-expression
 import chai from "chai";
-import {extractVariableName, isExpression, isString} from "../main/config";
+import {constructExpression, extractVariableName, isExpression, isString} from "../main/config";
 
 describe("Given Config Module", () => {
     describe("When isString is called", () => {
@@ -52,4 +52,18 @@ describe("Given Config Module", () => {
         });
     });
 
+    describe("When constructExpression is called", () => {
+        it("Should return env expression from a valid variable", () => {
+            chai.expect(constructExpression("PATH")).to.be.equal("process.env.PATH");
+            chai.expect(constructExpression("  PATH ")).to.be.equal("process.env.PATH");
+        });
+
+        it("Should return undefined from an empty variable", () => {
+            chai.expect(constructExpression("")).to.be.undefined;
+        });
+
+        it("Should return undefined from a null value", () => {
+            chai.expect(constructExpression(null)).to.be.undefined;
+        });
+    });
 });

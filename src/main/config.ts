@@ -31,23 +31,26 @@ export const isExpression = (value: string): boolean => {
 };
 
 export const extractVariableName = (value: string): string => {
-    value = value?.trim();
     if (!value) {
         return undefined;
     }
+    value = value.trim();
     const startPosition = EXPRESSION_START.length;
     const endPosition = value.length - (EXPRESSION_START.length + EXPRESSION_END.length);
     const variableName = value.substr(startPosition, endPosition).trim();
     return variableName.length > 0 ? variableName : undefined;
 };
 
-export const constructExpression = (variableName: string): string =>
-    `process.env.${variableName}`;
+export const constructExpression = (variableName: string): string => {
+    if (!variableName) {
+        return undefined;
+    }
+    variableName = variableName.trim();
+    return variableName.length > 0 ? `process.env.${variableName}` : undefined;
+};
 
 export const evaluateExpression = (expression: string): string =>
     eval(ts.transpile(expression));
 
 populateEnvironmentVariables(config);
 export const getConfig = (): any => config;
-
-const x = () => 12;
