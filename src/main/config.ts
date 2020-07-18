@@ -5,9 +5,9 @@ import config from "./application.json";
 const EXPRESSION_START = "{{";
 const EXPRESSION_END = "}}";
 
-const populateEnvironmentVariables = (obj: any): any => {
+export const populateEnvironmentVariables = (obj: any): any => {
     Object.keys(obj)
-        .forEach((key) => {
+        .forEach((key: string) => {
             const value = obj[key];
             if (isString(value)) {
                 if (isExpression(value)) {
@@ -22,20 +22,32 @@ const populateEnvironmentVariables = (obj: any): any => {
     return obj;
 };
 
-const isString = (value: any): boolean =>
+export const isString = (value: any): boolean =>
     typeof value === "string";
 
-const isExpression = (value: string): boolean =>
-    value.startsWith(EXPRESSION_START) && value.endsWith(EXPRESSION_END);
+export const isExpression = (value: string): boolean => {
+    value = value?.trim();
+    return (value?.startsWith(EXPRESSION_START) && value?.endsWith(EXPRESSION_END)) ?? false;
+};
 
-const extractVariableName = (value: string): string =>
-    value.substr(EXPRESSION_START.length, value.length - (EXPRESSION_START.length + EXPRESSION_END.length)).trim();
+export const extractVariableName = (value: string): string => {
+    value = value?.trim();
+    if (!value) {
+        return undefined;
+    }
+    const startPosition = EXPRESSION_START.length;
+    const endPosition = value.length - (EXPRESSION_START.length + EXPRESSION_END.length);
+    const variableName = value.substr(startPosition, endPosition).trim();
+    return variableName.length === 0 ? undefined : variableName;
+};
 
-const constructExpression = (variableName: string): string =>
+export const constructExpression = (variableName: string): string =>
     `process.env.${variableName}`;
 
-const evaluateExpression = (expression: string): string =>
+export const evaluateExpression = (expression: string): string =>
     eval(ts.transpile(expression));
 
 populateEnvironmentVariables(config);
-export = config;
+export const getConfig = (): any => config;
+
+const x = () => 12;

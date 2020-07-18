@@ -1,5 +1,5 @@
 import express, { Express } from "express";
-import config from "./config";
+import {getConfig} from "./config";
 import logger from "./logger";
 import router from "./routes";
 
@@ -9,7 +9,7 @@ const port: number =  +process.env.PORT || 8080;
 app.use("/", router);
 
 const server = app.listen(port, () => {
-    logger.info(`${config.local.path} server started at http://localhost:${port}`);
+    logger.info(`${getConfig().local.path} server started at http://localhost:${port}`);
 });
 
 export = server;
