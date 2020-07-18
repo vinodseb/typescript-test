@@ -8,7 +8,7 @@ before( async () => {
     process.env.VARIABLE_ONE = VARIABLE_ONE;
 });
 
-describe("Given Config Module", () => {
+describe("Application Config Module Tests", () => {
     describe("When isString is called", () => {
         it("Should return true with a valid string", () => {
             chai.expect(isString("${VALID_STRING}")).to.be.equal(true);

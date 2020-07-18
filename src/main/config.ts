@@ -31,22 +31,16 @@ export const isExpression = (value: string): boolean => {
 };
 
 export const extractVariableName = (value: string): string => {
-    if (!value) {
-        return undefined;
-    }
-    value = value.trim();
+    value = value?.trim();
     const startPosition = EXPRESSION_START.length;
-    const endPosition = value.length - (EXPRESSION_START.length + EXPRESSION_END.length);
-    const variableName = value.substr(startPosition, endPosition).trim();
-    return variableName.length > 0 ? variableName : undefined;
+    const endPosition = value?.length - (EXPRESSION_START.length + EXPRESSION_END.length);
+    const variableName = value?.substr(startPosition, endPosition).trim();
+    return variableName?.length > 0 ? variableName : undefined;
 };
 
 export const constructExpression = (variableName: string): string => {
-    if (!variableName) {
-        return undefined;
-    }
-    variableName = variableName.trim();
-    return variableName.length > 0 ? `process.env.${variableName}` : undefined;
+    variableName = variableName?.trim();
+    return variableName?.length > 0 ? `process.env.${variableName}` : undefined;
 };
 
 export const evaluateExpression = (expression: string): string =>
