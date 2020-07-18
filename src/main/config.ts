@@ -53,4 +53,5 @@ export const evaluateExpression = (expression: string): string =>
     eval(ts.transpile(expression ?? ""));
 
 populateEnvironmentVariables(config);
+
 export const getConfig = (): any => config;
