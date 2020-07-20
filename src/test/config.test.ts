@@ -2,10 +2,13 @@
 import chai from "chai";
 import {constructExpression, evaluateExpression, extractVariableName, isExpression, isString} from "../main/config";
 
-const VARIABLE_ONE = "test";
+const TEST_VARIABLE = {
+  key: "TEST_VARIABLE",
+  value: "test_value"
+};
 
 before( async () => {
-    process.env.VARIABLE_ONE = VARIABLE_ONE;
+    process.env.TEST_VARIABLE = TEST_VARIABLE.value;
 });
 
 describe("Application Config Module Tests", () => {
@@ -60,8 +63,10 @@ describe("Application Config Module Tests", () => {
 
     describe("When constructExpression is called", () => {
         it("Should return env expression from a valid variable", () => {
-            chai.expect(constructExpression("PATH")).to.be.equal("process.env.PATH");
-            chai.expect(constructExpression("  PATH ")).to.be.equal("process.env.PATH");
+            chai.expect(constructExpression(`${TEST_VARIABLE.key}`))
+                .to.be.equal(`process.env.${TEST_VARIABLE.key}`);
+            chai.expect(constructExpression(`  ${TEST_VARIABLE.key}   `))
+                .to.be.equal(`process.env.${TEST_VARIABLE.key}`);
         });
 
         it("Should return undefined from an empty variable", () => {
@@ -75,8 +80,10 @@ describe("Application Config Module Tests", () => {
 
     describe("When evaluateExpression is called", () => {
         it("Should return value from a valid expression", () => {
-            chai.expect(evaluateExpression("process.env.VARIABLE_ONE")).to.be.equal(VARIABLE_ONE);
-            chai.expect(evaluateExpression(" process.env.VARIABLE_ONE ")).to.be.equal(VARIABLE_ONE);
+            chai.expect(evaluateExpression(`process.env.${TEST_VARIABLE.key}`))
+                .to.be.equal(TEST_VARIABLE.value);
+            chai.expect(evaluateExpression(` process.env.${TEST_VARIABLE.key} `))
+                .to.be.equal(TEST_VARIABLE.value);
         });
 
         it("Should return undefined from an empty expression", () => {
